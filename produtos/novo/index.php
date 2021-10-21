@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+  session_start();
 
   /*
   CONEXÃO COM O BANCO DE DADOS
@@ -51,18 +51,21 @@ session_start();
 
           <ul>
 
-          <?php
- 
-            if(isset($_SESSION["erros"])) {
+            <?php
+            
+              if (isset($_SESSION["erros"])) {
+                
+                foreach ($_SESSION["erros"] as $erro) {
+                  
+                  echo "<li> $erro </li>";
 
-            foreach($_SESSION["erros"] as $erro) {
-            echo "<li> $erro </li>";
+                }
 
-        }
-          unset($_SESSION["erros"]);
-     }
- 
- ?>
+                unset($_SESSION["erros"]);
+
+              }
+            
+            ?>
 
           </ul>
 
