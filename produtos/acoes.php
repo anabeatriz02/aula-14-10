@@ -191,6 +191,42 @@ switch ($_POST["acao"]) {
     default:
         # code...
         break;
+
+        case "editar":
+
+            //ATUALIZANDO A IMAGEM DO PRODUTO
+            $produtoId = $_POST["produtoId"];
+
+            if ($_FILES["foto"]["error"] != UPLOAD_ERR_NO_FILE){
+
+                $sqlImagem = "SELECT imagem FROM tbl_produto WHERE id = $produto";
+
+                $resultado = mysqli_query($sqlImagem);
+                $produto = mysqli_fecth_array($resultado);
+
+                echo '/fotos/' . $produto["imagem"];exit;
+            }
+
+            //CAPTURA OS DADOS DE TEXTO E DE NUMERO
+            $descricao = $_POST["descricao"];
+
+            $peso = str_replace(".", "", $_POST["peso"]);
+            $peso = str_replace(",", ".", $peso;);
+
+            $valor = str_replace(".", "", $_POST["valor"]);
+            $valor = str_replace(",", ".", $valor;);
+
+            $quantidade = $_POST["quantidade"];
+            $cor = $_POST["cor"];
+            $tamanho = $_POST["tamanho"];
+            $categoriaId = $_POST["categoriaId"];
+
+
+
+
+            break;
+
+            default:
 }
 
 ?> 

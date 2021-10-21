@@ -1,15 +1,18 @@
 <?php
-
+ 
     require('../../database/conexao.php');
-
+ 
     $idProduto = $_GET['id'];
-
+ 
     $sql =  "SELECT * FROM tbl_produto WHERE id = $idProduto";
-
+ 
     $resultado = mysqli_query($conexao, $sql);
-
+ 
     $produto = mysqli_fetch_array($resultado);
 
+    $sqlCategoria = "SELECT * FROM tbl_categoria";
+    $resultado = mysqli_query($conexao, $sqlCategoria);
+ 
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +40,7 @@
          
           <input type="hidden" name="acao" value="editar" />
           
-          <input type="hidden" name="produtoId" value="" />
+          <input type="hidden" name="produtoId" value="<?php echo $produtoId ?>"  />
           
           <h1>Editar Produto</h1>
           
@@ -89,6 +92,19 @@
               <option value="">SELECIONE</option>
     
                 <option value="" >
+
+                <?php 
+              while ($categoria = mysqli_fetch_array($resultado)) {
+                # code...
+              
+            
+            ?>
+                <option value="<?php echo $categoria['id'] ?>"
+                <?php echo $categoria["id"] == $produto["categoria_id"] ? "selected" : "" ?>
+                
+                >
+              
+                <?php echo $categoria["descricao"] ?> 
                   
                 </option>
          
