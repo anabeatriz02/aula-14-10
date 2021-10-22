@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
   require('../../database/conexao.php');
 
   $produtoId = $_GET["id"];
