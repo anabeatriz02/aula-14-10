@@ -192,17 +192,17 @@
  
         case "editar":
 
+             /** PROCESSO DE VALIDAÇÃO **/
+
             $erros = validarCampos();
  
-            if (count($erros) > 0) {
+            if (count($erros) > 0);
                 
                 $_SESSION["erros"] = $erros;
  
-                header("location: novo/index.php");
+                header("location: editar/index.php");
  
                 exit;
- 
-            }
  
             /** ATUALIZANDO A IMAGEM DO PRODUTO **/
  
@@ -281,6 +281,6 @@
         default:
             # code...
             break;
-    }
+        }
  
 ?>

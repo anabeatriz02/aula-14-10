@@ -49,7 +49,19 @@ $resultado = mysqli_query($conexao, $sqlCategoria);
           <h1>Editar Produto</h1>
           
           <ul>
-      
+            <?php
+          if (isset($_SESSION["erros"])) {
+                
+                foreach ($_SESSION["erros"] as $erro) {
+                  
+                  echo "<li> $erro </li>";
+
+                }
+
+                unset($_SESSION["erros"]);
+
+              }
+            ?>
           </ul>
 
           <div class="input-group span2">
