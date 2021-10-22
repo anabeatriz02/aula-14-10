@@ -191,6 +191,18 @@
         break;
  
         case "editar":
+
+            $erros = validarCampos();
+ 
+            if (count($erros) > 0) {
+                
+                $_SESSION["erros"] = $erros;
+ 
+                header("location: novo/index.php");
+ 
+                exit;
+ 
+            }
  
             /** ATUALIZANDO A IMAGEM DO PRODUTO **/
  
@@ -209,7 +221,7 @@
                 // exit;
  
                 //EXCLUSÃO DA FOTO (ARQUIVO) ANTIGA DA PASTA
-                // unlink("./fotos/" . $produto["imagem"]);
+                unlink("./fotos/" . $produto["imagem"]);
  
                 //RECUPERA O NOME ORIGINAL DA IMAGEM E ARMAZENA NA VARIÁVEL
                 $nomeArquivo = $_FILES["foto"]["name"];
@@ -222,7 +234,7 @@
                 $novoNomeArquivo = md5(microtime()) . ".$extensao";
  
                 //REALIZAMOS O UPLOAD DA IMAGEM COM O NOVO NOME
-                // move_uploaded_file($_FILES["foto"]["tmp_name"], "fotos/$novoNomeArquivo");
+                move_uploaded_file($_FILES["foto"]["tmp_name"], "fotos/$novoNomeArquivo");
  
             }
  
@@ -256,7 +268,7 @@
             //Verifica se tem imagem nova para atualizar
             $sqlUpdate .= isset($novoNomeArquivo) ? ", imagem = '$novoNomeArquivo'" : "";
  
-            $sqlUpdate .= " WHERE id = $produtoId"; 
+            // $sqlUpdate .= " WHERE id = $produtoId"; 
  
             echo $sqlUpdate; exit;
  
