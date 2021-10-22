@@ -199,34 +199,76 @@ switch ($_POST["acao"]) {
 
             if ($_FILES["foto"]["error"] != UPLOAD_ERR_NO_FILE){
 
-                $sqlImagem = "SELECT imagem FROM tbl_produto WHERE id = $produto";
+                $sqlImagem = "SELECT imagem FROM tbl_produto WHERE id = $produtoId";
 
-                $resultado = mysqli_query($sqlImagem);
+                $resultado = mysqli_query($conexao, $sqlImagem);
                 $produto = mysqli_fecth_array($resultado);
+                
+                // echo $_FILES["foto"]["name"];
+                //echo <br></br>
+                // echo '/fotos/' . $produto["imagem"];
+                // exit;
 
-                echo '/fotos/' . $produto["imagem"];exit;
+                //EXCLUSÃO DA FOTO(ARQUIVO) ANTIGA DA PASTA
+                unlink("./fotos/" . $produto["imagem"]);
+
+                //RECUPERA O NOME ORIGINAL DA IMAGEM E ARMAZENA A VARIAVEL
+                $nomeArquivo = $_FILES["foto"]["name"];
+
+                //EXTRAI A EXTENSÃO DO ARQUIVO DE IMAGEM
+                $extensao = pathinfo($nomeArquivo, PATHINFO_EXTENSION);
+
+                //DEFINE UM MO,E ALEATORIO PARA A AIMAGEM QUE SERÁ ARMAZENADA NA PASTA "fotos"
+                $novoNomeArquivo = md5(microtime()) . ".$extensao";
+
+                //REALIZAMOS O UPLOAD DA IMAGEM COM O NOVO NOME
+                move_uploaded_file($_FILES["fotos"]["name"], "foto/$novoNomeArquivo");
+
+
+
+
+
+
+
+
+
+
+
             }
 
             //CAPTURA OS DADOS DE TEXTO E DE NUMERO
             $descricao = $_POST["descricao"];
 
             $peso = str_replace(".", "", $_POST["peso"]);
-            $peso = str_replace(",", ".", $peso;);
+            $peso = str_replace(",", ".", $peso);
 
             $valor = str_replace(".", "", $_POST["valor"]);
-            $valor = str_replace(",", ".", $valor;);
+            $valor = str_replace(",", ".", $valor);
 
             $quantidade = $_POST["quantidade"];
             $cor = $_POST["cor"];
             $tamanho = $_POST["tamanho"];
+            $desconto = $_POST["desconto"];
             $categoriaId = $_POST["categoriaId"];
 
+            //MONTAGEM E EXECUÇÃO DA INSTRUÇÃO SQL DE UPDATE
+
+            $sqlUpdate = "UPDATE tbl_produtos SET"
+
+            $quantidade = "quantidade";
+            $cor = "cor";
+            $tamanho = $_POST["tamanho"];
+            $desconto = $_POST["desconto"];
+            $categoriaId = $_POST["categoriaId"];
 
 
 
             break;
 
-            default:
-}
+            default;
+               #code... 
+
+               break;
+      }
 
 ?> 

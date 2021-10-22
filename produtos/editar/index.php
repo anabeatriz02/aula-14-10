@@ -91,8 +91,7 @@
 
               <option value="">SELECIONE</option>
     
-                <option value="" >
-
+              
                 <?php 
               while ($categoria = mysqli_fetch_array($resultado)) {
                 # code...
@@ -107,6 +106,8 @@
                 <?php echo $categoria["descricao"] ?> 
                   
                 </option>
+
+                <?php } ?>
          
            </select>
 
@@ -133,5 +134,4 @@
   </footer>
   
 </body>
-
 </html>

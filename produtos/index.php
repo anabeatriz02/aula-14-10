@@ -133,5 +133,4 @@ $resultado = mysqli_query($conexao, $sql);
     </script>
 
 </body>
-
 </html>
