@@ -205,12 +205,12 @@ switch ($_POST["acao"]) {
                 $produto = mysqli_fecth_array($resultado);
                 
                 // echo $_FILES["foto"]["name"];
-                //echo <br></br>
+                //echo '<br></br>';
                 // echo '/fotos/' . $produto["imagem"];
                 // exit;
 
                 //EXCLUSÃO DA FOTO(ARQUIVO) ANTIGA DA PASTA
-                unlink("./fotos/" . $produto["imagem"]);
+                // unlink("./fotos/" . $produto["imagem"]);
 
                 //RECUPERA O NOME ORIGINAL DA IMAGEM E ARMAZENA A VARIAVEL
                 $nomeArquivo = $_FILES["foto"]["name"];
@@ -222,17 +222,7 @@ switch ($_POST["acao"]) {
                 $novoNomeArquivo = md5(microtime()) . ".$extensao";
 
                 //REALIZAMOS O UPLOAD DA IMAGEM COM O NOVO NOME
-                move_uploaded_file($_FILES["fotos"]["name"], "foto/$novoNomeArquivo");
-
-
-
-
-
-
-
-
-
-
+                // move_uploaded_file($_FILES["fotos"]["name"], "foto/$novoNomeArquivo");
 
             }
 
@@ -253,13 +243,31 @@ switch ($_POST["acao"]) {
 
             //MONTAGEM E EXECUÇÃO DA INSTRUÇÃO SQL DE UPDATE
 
-            $sqlUpdate = "UPDATE tbl_produtos SET"
+            $sqlUpdate = "UPDATE tbl_produtos SET 
 
-            $quantidade = "quantidade";
-            $cor = "cor";
-            $tamanho = $_POST["tamanho"];
-            $desconto = $_POST["desconto"];
-            $categoriaId = $_POST["categoriaId"];
+            descricao = $descricao, 
+            peso = $peso, 
+            quantidade = $quantidade,
+            cor = $cor,
+            tamanho = $tamanho,
+            desconto = $desconto,
+            categoria_id = $categoriaId";
+     
+            //Verifique se tem imagem nova para atualizar
+     
+            $sqlUpdate = isset($novoNomeArquivo) ? ", imagem = '$novoNomeArquivo'" : "";
+     
+            $sqlUpdate .= " WHERE id = $produtoId";
+     
+            echo $sqlUpdate;
+
+            exit;
+            
+            $resultado =mysqli_query($conexao, $sqlUpdate);
+            
+            header("location: index.php");
+
+
 
 
 
