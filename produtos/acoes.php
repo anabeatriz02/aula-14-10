@@ -200,7 +200,7 @@
                 
                 $_SESSION["erros"] = $erros;
  
-                header("location: editar/index.php");
+                header("location: editar/index.php id=$produtoId");
  
                 exit;
  
