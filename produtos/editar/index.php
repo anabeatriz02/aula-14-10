@@ -1,9 +1,16 @@
 <?php
 
+<<<<<<< HEAD
   session_start();
 
   require('../../database/conexao.php');
 
+=======
+session_start();
+
+  require('../../database/conexao.php');
+
+>>>>>>> 41725da73806d7652f6e660abaf9e62b52c573f7
   $produtoId = $_GET["id"];
 
   /**** RECUPERA OS DADOS DE PRODUTO  ****/
@@ -54,10 +61,15 @@ $resultado = mysqli_query($conexao, $sqlCategoria);
           <h1>Editar Produto</h1>
           
           <ul>
+<<<<<<< HEAD
 
             <?php
               
               if (isset($_SESSION["erros"])) {
+=======
+            <?php
+          if (isset($_SESSION["erros"])) {
+>>>>>>> 41725da73806d7652f6e660abaf9e62b52c573f7
                 
                 foreach ($_SESSION["erros"] as $erro) {
                   
@@ -68,9 +80,13 @@ $resultado = mysqli_query($conexao, $sqlCategoria);
                 unset($_SESSION["erros"]);
 
               }
+<<<<<<< HEAD
             
             ?>
       
+=======
+            ?>
+>>>>>>> 41725da73806d7652f6e660abaf9e62b52c573f7
           </ul>
 
           <div class="input-group span2">
