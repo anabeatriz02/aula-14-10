@@ -1,20 +1,26 @@
 <?php
- 
-    require('../../database/conexao.php');
- 
-    $idProduto = $_GET['id'];
- 
-    $sql =  "SELECT * FROM tbl_produto WHERE id = $idProduto";
- 
-    $resultado = mysqli_query($conexao, $sql);
- 
-    $produto = mysqli_fetch_array($resultado);
 
-    $sqlCategoria = "SELECT * FROM tbl_categoria";
-    $resultado = mysqli_query($conexao, $sqlCategoria);
- 
+  session_start();
+
+  require('../../database/conexao.php');
+
+  $produtoId = $_GET["id"];
+
+  /**** RECUPERA OS DADOS DE PRODUTO  ****/
+  $sqlProduto = "SELECT * FROM tbl_produto WHERE id = $produtoId";
+  $resultado = mysqli_query($conexao, $sqlProduto);
+  $produto = mysqli_fetch_array($resultado);
+
+/**** RECUPERA OS DADOS DE CATEGORIA  ****/
+$sqlCategoria = "SELECT * FROM tbl_categoria";
+$resultado = mysqli_query($conexao, $sqlCategoria);
+
+  // echo '<pre>';
+  // var_dump($produto);
+  // echo '</pre>';
+  // exit;
+
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -29,6 +35,9 @@
 </head>
 
 <body>
+
+    <!-- INCLUSÃO DO COMPONENTE HEADER -->
+    <?php include('../../componentes/header/header.php'); ?>
  
   <div class="content">
 
@@ -40,11 +49,27 @@
          
           <input type="hidden" name="acao" value="editar" />
           
-          <input type="hidden" name="produtoId" value="<?php echo $produtoId ?>"  />
+          <input type="hidden" name="produtoId" value="<?php echo $produtoId?>" />
           
           <h1>Editar Produto</h1>
           
           <ul>
+
+            <?php
+              
+              if (isset($_SESSION["erros"])) {
+                
+                foreach ($_SESSION["erros"] as $erro) {
+                  
+                  echo "<li> $erro </li>";
+
+                }
+
+                unset($_SESSION["erros"]);
+
+              }
+            
+            ?>
       
           </ul>
 
@@ -55,7 +80,7 @@
 
           <div class="input-group">
             <label for="peso">Peso</label>
-            <input type="text" name="peso" value="<?php echo $produto["peso"]?>" id="peso" >
+            <input type="text" name="peso" value="<?php echo number_format($produto["peso"], 2, ",", ".")?>" id="peso" >
           </div>
 
           <div class="input-group">
@@ -75,7 +100,7 @@
 
           <div class="input-group">
             <label for="valor">Valor</label>
-            <input type="text" name="valor" value="<?php echo $produto["valor"]?>" id="valor" >
+            <input type="text" name="valor" value="<?php echo number_format($produto["valor"], 2, ",", ".")?>" id="valor" >
           </div>
 
           <div class="input-group">
@@ -89,25 +114,21 @@
 
             <select id="categoria" name="categoria" >
 
-              <option value="">SELECIONE</option>
-    
-              
-                <?php 
-              while ($categoria = mysqli_fetch_array($resultado)) {
-                # code...
-              
-            
+            <option value="">SELECIONE</option>
+
+            <?php 
+              while ($categoria = mysqli_fetch_array($resultado)) { 
             ?>
-                <option value="<?php echo $categoria['id'] ?>"
-                <?php echo $categoria["id"] == $produto["categoria_id"] ? "selected" : "" ?>
-                
+
+                <option value="<?php echo $categoria["id"]?>" 
+                <?php echo $categoria["id"] == $produto["categoria_id"] ? "selected"  : "" ?>
                 >
               
-                <?php echo $categoria["descricao"] ?> 
-                  
+                <?php echo $categoria["descricao"]?>
+
                 </option>
 
-                <?php } ?>
+            <?php } ?>
          
            </select>
 
@@ -134,4 +155,5 @@
   </footer>
   
 </body>
+
 </html>
