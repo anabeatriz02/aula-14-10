@@ -18,13 +18,13 @@
                     
                 // echo 'LOGADO!';
 
-                $_SESSION["usuarioID"] = $dadosUsuario["id"];
+                $_SESSION["usuarioId"] = $dadosUsuario["id"];
                 $_SESSION["nome"] = $dadosUsuario["nome"];
 
-                echo $_SESSION["usuarioID"];
-                echo $_SESSION["nome"];
+                // echo $_SESSION["usuarioID"];
+                // echo $_SESSION["nome"];
 
-                // header("location: ../../produtos/index.php");
+                header("location: ../../produtos/index.php");
 
             }else {
                 echo 'ALGO DEU ERRADO!!';
@@ -41,6 +41,9 @@
             realizarLogin($usuario, $senha, $conexao);
 
             break;
+
+        case 'logout':
+            echo 'FAZENDO LOGOUT';
         
         default:
             # code...

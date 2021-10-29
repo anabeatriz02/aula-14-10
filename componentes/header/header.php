@@ -1,8 +1,9 @@
 
 <?php
 
-$raiz = "/AnaBeatriz/senai-icatalogo-mysqli-alunos";
+session_start();
 
+$raiz = "/AnaBeatriz/senai-icatalogo-mysqli-alunos";
 
 ?>
 
@@ -41,7 +42,7 @@ $raiz = "/AnaBeatriz/senai-icatalogo-mysqli-alunos";
                 <a id="menu-admin" onclick="logout()">Sair</a>
             </ul>
         </nav>
-        <form id="form-logout" style="display:none" method="POST" action="/componentes/header/acoesLogin.php">
+        <form id="form-logout" style="display:none" method="POST" action=" <?php echo $raiz?>/componentes/header/acoesLogin.php">
             <input type="hidden" name="acao" value="logout" />
         </form>
     <?php
