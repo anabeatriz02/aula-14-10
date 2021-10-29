@@ -26,7 +26,7 @@ $raiz = "/AnaBeatriz/senai-icatalogo-mysqli-alunos";
         </nav>
         <div id="container-login" class="container-login">
             <h1>Fazer Login</h1>
-            <form method="POST" action="/componentes/header/acoesLogin.php">
+            <form method="POST" action="<?php echo $raiz?>/componentes/header/acoesLogin.php">
                 <input type="hidden" name="acao" value="login" />
                 <input type="text" name="usuario" placeholder="Usuário" />
                 <input type="password" name="senha" placeholder="Senha" />
