@@ -28,6 +28,8 @@
 
             }else {
                 echo 'ALGO DEU ERRADO!!';
+                header("location: ../../produtos/index.php");
+
             }
         }
 
