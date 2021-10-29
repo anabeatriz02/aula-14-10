@@ -43,7 +43,9 @@
             break;
 
         case 'logout':
-            echo 'FAZENDO LOGOUT';
+            // echo 'FAZENDO LOGOUT';
+            session_destroy();
+            header("location: ../../produtos/index.php");
         
         default:
             # code...
